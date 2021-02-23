@@ -7,11 +7,30 @@ function App() {
   const brandName = ['Samsung', 'Nokia', 'Oppo'];
   const products = [
                      {name: 'Photoshop', price: '$100'},
-                     {name: 'Illustrator', price: '$80.90'}
+                     {name: 'Illustrator', price: '$80.90'},
+                     {name: 'PDF Reader', price: '$20'},
+                     {name: 'Adobe XD', price: '$110'},
+                     {name: 'Adobe Audition', price: '$65'},
+                     {name: 'Adobe Premire Pro', price: '$150'},
+                     {name: 'Adobe After Effect', price: '$250'}
                     ]
+  
+  const productName = brandName.map (product => product);
+  console.log (productName);
   return (
     <div className="App">
       <header className="App-header">
+        <ul>
+          <li>{productName[0]}</li>
+          <li>{productName[1]}</li>
+          <li>{productName[2]}</li>
+        </ul>
+        <ol>
+           {
+            products.map (product =>  <AdobeProduct product={product}> </AdobeProduct>)
+           }
+        </ol>
+
         <Product brand= {brandName[0]} model="A 51" price="100 $" color="Blue"></Product>
         <Product brand= {brandName[1]} model="Lumia" price="150 $" color="Red"></Product>
         <Product brand= {brandName[2]} model="F 17" price="80 $" color="Pink"></Product>
@@ -22,6 +41,7 @@ function App() {
                    }}>
         <AdobeProduct product={products[0]}> </AdobeProduct>
         <AdobeProduct product={products[1]}> </AdobeProduct>
+        <AdobeProduct product={products[2]}> </AdobeProduct>
         </div>
         
         </div>
@@ -51,14 +71,13 @@ function AdobeProduct (props) {
     backgroundColor: 'white', 
     color: 'black',
     boxShadow: '5px 5px 10px black',
-    width:'200px',
-    height: '200px',
+    width:'250px',
+    height: '250px',
     margin: '10px',
     border: '1px solid gray',
     borderRadius: '10px'
   }
   const {name, price} = props.product;
-  console.log (props.product.price);
   return (<div style  = {productStyle}>
     <h3>{name}</h3>
     <h5>{price}</h5>
