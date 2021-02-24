@@ -1,3 +1,4 @@
+import react, {useEffect, useState} from 'react';
 import logo from './logo.svg';
 import './App.css';
 import reactDom from 'react-dom';
@@ -30,7 +31,7 @@ function App() {
             products.map (product =>  <AdobeProduct product={product}> </AdobeProduct>)
            }
         </ol>
-
+        <Users> </Users>
         <Product brand= {brandName[0]} model="A 51" price="100 $" color="Blue"></Product>
         <Product brand= {brandName[1]} model="Lumia" price="150 $" color="Red"></Product>
         <Product brand= {brandName[2]} model="F 17" price="80 $" color="Pink"></Product>
@@ -43,7 +44,7 @@ function App() {
         <AdobeProduct product={products[1]}> </AdobeProduct>
         <AdobeProduct product={products[2]}> </AdobeProduct>
         </div>
-        
+        <Counter></Counter>
         </div>
         
 
@@ -83,6 +84,34 @@ function AdobeProduct (props) {
     <h5>{price}</h5>
     <button>Buy now</button>
   </div>)
+}
+
+function Counter () {
+  const [count, setCount] = useState (10);
+  const handleIncrease = () => {
+    setCount(count + 1);
+  };
+  return (<div>
+    <h2>Count: {count}</h2>
+    <button onClick={() => setCount(count + 1)}>Increase</button>
+    <button onClick={() => setCount(count - 1)}>Decrease</button>
+  </div>)
+}
+function Users () {
+  const [user, setUser] = useState([]);
+  useEffect (() =>{
+       fetch ('https://jsonplaceholder.typicode.com/users')
+       .then (res => res.json())
+       .then (data => setUser(data))
+  },[]);
+  return (
+    <div>
+      <h3>Dynamic users {user.length}</h3>
+      {
+        user.map (users => <p>{users.phone}</p> )
+      }
+    </div>
+  )
 }
 
 export default App;
